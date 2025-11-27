@@ -1,5 +1,5 @@
 from django.db import models
-class Authour (models.Model):
+class Author(models.Model):
     name = models.CharField (max_length=100)
     
     def __str__(self):
@@ -7,17 +7,17 @@ class Authour (models.Model):
 
 class Book (models.Model):
     title = models.CharField (max_length=200)
-    author = models.ForeignKey (authour, on_delete=models.CASCADE)
+    Author = models.ForeignKey (Authour, on_delete=models.CASCADE)
     publication_year = models.IntegerField()
 
 class Libary (models.Model):
         name = models.CharField (max_length=100)
         location = models.CharField (max_length=200)
-        books = models.ManyToManyField (book)
+        books = models.ManyToManyField (Book)
 
 class Libarian (models.Model):
     name = models.CharField (max_length=100)
-    library = models.OneToOneField (libary, on_delete=models.CASCADE)        
+    library = models.OneToOneField (Libary, on_delete=models.CASCADE)        
 
 
     
