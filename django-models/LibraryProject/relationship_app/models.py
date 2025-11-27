@@ -1,18 +1,21 @@
 from django.db import models
-class authour (models.Model):
+class Authour (models.Model):
     name = models.CharField (max_length=100)
+    
+    def __str__(self):
+        return self.name
 
-class book (models.Model):
+class Book (models.Model):
     title = models.CharField (max_length=200)
     author = models.ForeignKey (authour, on_delete=models.CASCADE)
     publication_year = models.IntegerField()
 
-class libary (models.Model):
+class Libary (models.Model):
         name = models.CharField (max_length=100)
         location = models.CharField (max_length=200)
         books = models.ManyToManyField (book)
 
-class libarian (models.Model):
+class Libarian (models.Model):
     name = models.CharField (max_length=100)
     library = models.OneToOneField (libary, on_delete=models.CASCADE)        
 
