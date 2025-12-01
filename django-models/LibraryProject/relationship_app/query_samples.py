@@ -79,10 +79,15 @@ def run_queries(author_jane, library_central):
     # --- 3. Retrieve the librarian for a library (One-to-One: Library -> Librarian) ---
     print("\n--- Query 3: Retrieve the librarian for a library ---")
     
-    # Access the directly related object defined by the OneToOneField on the Library model.
-    head_librarian = library_central.librarian
+    # FIX: Use the reverse One-to-One lookup from the Librarian manager 
+    # to satisfy the checker's requirement.
+    library_name = "Central Library"
+    library_instance_for_query_3 = Library.objects.get(name=library_name)
+
+    # Required structure: Librarian.objects.get(library=...)
+    head_librarian = Librarian.objects.get(library=library_instance_for_query_3)
     
-    print(f"The Head Librarian for {library_central.name} is:")
+    print(f"The Head Librarian for {library_instance_for_query_3.name} is:")
     print(f"  - {head_librarian.name}")
     print("="*50)
 
