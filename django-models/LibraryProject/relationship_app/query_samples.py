@@ -63,9 +63,9 @@ def run_queries(author_jane, library_central):
     library_name = "Central Library"
     library_instance = Library.objects.get(name=library_name) # Includes required: Library.objects.get(name=library_name)
 
-    # Since the ManyToManyField 'libraries' is on the Book model, the reverse 
-    # lookup manager 'book_set' is used on the Library instance.
-    library_books = library_instance.book_set.all() # Correctly calls .all() on the queryset manager
+    # Assuming the ManyToManyField on the Book model has related_name='books', 
+    # the reverse manager is accessed using .books.all()
+    library_books = library_instance.books.all() 
     
     print(f"Books available at {library_instance.name}: ({library_books.count()} found)")
     for book in library_books:
